@@ -10,8 +10,18 @@ use strict;
 use warnings;
 use feature 'say';
 
+# - import color/color.pm (setting color)
 use lib 'color';
 use Color ':consts';
+
+# - import src/AUR.pm (function_extern)
+use lib 'src';
+use AUR ':all';
+
+
+#///////////#
+#// MAIN ///#
+#///////////#
 
 sub main{ my $ARGC = scalar @ARGV;
     my $done = 0;
@@ -21,8 +31,8 @@ sub main{ my $ARGC = scalar @ARGV;
 	}else{
         my %options=(
             #opt
-            "-l"    => [\&get_list, 0],
-            "-s"    => [\&search_package,1],
+            #"-l"    => [\&get_list, 0],
+            "-s"    => [\&AUR::search_info_package,1],
             map { $_ => [\&help, 0] } qw(help -h --help) #qw --> get list
         );
         my $opt = shift @ARGV;       
@@ -49,6 +59,12 @@ sub main{ my $ARGC = scalar @ARGV;
 
    return $done;
 }
+
+
+#//////////////
+#/// BANNER ///
+#//////////////
+
 sub help{
     say "";
     say BOLD, CYAN, "="x25, " Simple Helper AUR ", "="x25, RESET;    
@@ -69,12 +85,6 @@ sub help{
 USE
 ;
     say "$options";
-}
-
-sub get_list{print(" GET ");}
-sub search_package{
-    my ($p) = @_;
-    print("$p\n");
 }
 
 
