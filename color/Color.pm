@@ -1,5 +1,9 @@
 # File: color/Color.pm
 
+#/////////////////////#
+#/// SETTING COLOR ///#
+#/////////////////////#
+
 package Color;
 
 use strict;
@@ -24,4 +28,4 @@ our %EXPORT_TAGS = (
     consts => ['BOLD', 'CYAN', 'WHITE', 'RED','RESET']
 );
 
-1;
+1; #exit succefull
