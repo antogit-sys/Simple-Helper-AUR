@@ -9,7 +9,7 @@ package AUR;
 use strict;
 use warnings;
 use feature "say";
-use LWP::UserAgent;
+
 use JSON;
 
 # - import color/color.pm (setting color)
@@ -21,58 +21,88 @@ use Exporter 'import';
 #
 # mains functions 
 #
-sub search_info_package {
+sub search_to_info {
     my $pkg = shift;
-
     my $url = "https://aur.archlinux.org/rpc/?v=5&type=search&arg=$pkg";
-    my $ua = LWP::UserAgent->new;
-    my $response = $ua->get($url);
-
-    unless ($response->is_success) {
-        say RED, BOLD, "!Error Request:\n\t", RESET, $response->status_line, "\n";
-        return;  # Return early in case of error
-    }
-
-    my $json_text = $response->decoded_content;
-    my $data = decode_json($json_text);
+    my $curl_o = eval{decode_json qx(curl -s -X GET "$url")};      
     
-    if ($data->{'resultcount'} == 1){
-        package_detail($data->{'results'}->[0]);
-    }elsif($data->{'resultcount'} > 1){
-         print_table($data->{'results'});
-         print CYAN,BOLD,"number?> ",RESET;
-         my $num = <STDIN>;
-         chomp $num;
-         package_detail($data->{'results'}[$num - 1]) unless $num eq "" or int($num)>$data->{'resultcount'}; 
-        # Adjust index for user input
-    }else{
-        say RED,BOLD,"!No packages matched your search criteria.: $data",RESET,"\n";
-        return;
+    die RED, BOLD, "Oops, something went wrong.",RESET if $@;
+    
+    my $num = $curl_o->{'resultcount'};
+    
+    if($num == 1){
+        die RED, BOLD, "no packages found..\n",RESET unless $curl_o->{'results'}[0]{'Name'} eq $pkg;
+        package_detail($pkg);
     }
-}    
+    elsif($num > 1){
+        print_table($curl_o->{'results'});
+        print CYAN, BOLD,"choice?> ",RESET;
+        
+        my $ch=<STDIN>;
+        chomp $ch;
+        
+        if($ch =~ /^\d+$/ and ($ch >= 1 && $ch <= $num)){
+            package_detail($curl_o->{'results'}[$ch - 1]{'Name'});#package_detail($pkg);
+        }
+        else{
+            print RED,BOLD,"!No packages matched your search criteria...",RESET,"\n";
+        }
+    }
+    else{
+        say RED,BOLD,"!No packages matched your search criteria.. ",RESET,"\n";
+    }
+}
 
+sub install_package{
+
+}
 
 #
 # - Utility
 #
-sub package_detail {
-    my ($pkg) = @_;
+sub package_detail{
+    my ($pkg)=@_;
+    my $url = "https://aur.archlinux.org/rpc/v5/info/$pkg";
+    my $curl_o = eval{decode_json qx(curl -s -X GET "$url")};
+   
+    die RED, BOLD, "!Error, something went wrong. ",RESET if $@;
+    
+    # directly access the first element of the array
+    my $result = $curl_o->{'results'}->[0];
+
+    # desired order of keys
+    my @keys = qw(
+        ID Name PackageBaseID PackageBase
+        Version Description Keywords License URL 
+        URLPath Conflicts Depends Provides Submitter 
+        Maintainer CoMaintainers NumVotes Popularity FirstSubmitted 
+        LastModified OutOfDate
+
+    );
+
     say "";
-    say CYAN, BOLD, "Package Details: ", $pkg->{'Name'}, " ", $pkg->{'Version'}, RESET;
+    say CYAN, BOLD, "Package Details: ", $result->{'Name'}," ", $result->{'Version'}, RESET;
     say CYAN, BOLD, "-" x 35, RESET;
-    say WHITE, BOLD,"Git Clone URL: ",RESET,"https://aur.archlinux.org/$pkg->{'Name'}.git";
-    say WHITE, BOLD,"Package Base: ",RESET,$pkg->{'PackageBase'};
-    say WHITE, BOLD,"Upstream URL: ",RESET,$pkg->{'URL'};
-    say WHITE, BOLD,"Description: ",RESET,$pkg->{'Description'};
-    say WHITE, BOLD,"Maintainer: ",RESET,$pkg->{'Maintainer'};
-    say WHITE, BOLD,"Votes: ",RESET,$pkg->{'NumVotes'};
-    say WHITE, BOLD,"Popularity: ",RESET,$pkg->{'Popularity'};
+    
+    foreach my $key (@keys){
+        my $value = $result->{$key};
+        if (defined $value){
+            if (ref($value) eq 'ARRAY') {
+                $value = join(", ", @$value);
+            }
+            say WHITE, BOLD, "$key: ", RESET, "$value";
+        }
+        else{
+            say WHITE, BOLD, "$key: ", RESET, "(undefined)"
+        }
+
+    }
     say CYAN, BOLD, "-" x 35, RESET;
 }
 
 sub print_table {
     my ($results) = @_;
-    my $num = 1;
+    my $num=1;
 
     say CYAN, BOLD, "\t\tID\tName";
     say "\t\t" . "-" x 30, RESET;
@@ -80,7 +110,9 @@ sub print_table {
         say WHITE,BOLD,"\t\t$num ",RESET,"  =>  $result->{'Name'} $result->{'Version'}";
         $num++;
     }
+    say "";
 }
+
 
 # - Export
 our @EXPORT_OK = qw(search_info_package);

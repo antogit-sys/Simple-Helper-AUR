@@ -32,7 +32,8 @@ sub main{ my $ARGC = scalar @ARGV;
         my %options=(
             #opt
             #"-l"    => [\&get_list, 0],
-            "-s"    => [\&AUR::search_info_package,1],
+            "-s"    => [\&AUR::search_to_info,1],
+            "-si"   => [\&AUR::install_package,1],
             map { $_ => [\&help, 0] } qw(help -h --help) #qw --> get list
         );
         my $opt = shift @ARGV;       
@@ -88,4 +89,6 @@ USE
 }
 
 
-exit main;
+exit main() if ($0 eq __FILE__);    # if corrent file is the main file 
+                                    #   exit the programm with the retun value of the main
+
