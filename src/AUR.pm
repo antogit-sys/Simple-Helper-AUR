@@ -62,11 +62,23 @@ sub install_package{
     my $url = "https://aur.archlinux.org/$pkg.git";
     my $dir = "$ENV{'HOME'}/.shaur/pkg-installed/";
 
+    
     my $isExists = sub {return decode_json(qx(curl -s -X "GET" "https://aur.archlinux.org/rpc/v5/info/@_"))->{'resultcount'} ? 1 : 0;};
     
+    local $SIG{INT} = $SIG{QUIT} = $SIG{TSTP} = sub {
+        my $pathToDir = qx(pwd);
+        my ($path) = $pathToDir =~ /\/([^\/]+)\/?\z/; #get current directory 
+        chomp $path;
+        if($path eq $pkg){
+            chdir "../";
+            system "rm -rf $pkg/";
+        }
+        exit;
+    };
+
+
     say CYAN, BOLD,"="x25," shaur",RESET;
     #die RED, BOLD,"$pkg package not found...\n",RESET unless $isExists->($pkg);
-
 
     my $exec_install = sub{
         say "... shaur is pointing to",CYAN,BOLD," => ",WHITE,BOLD,$dir,RESET;
@@ -77,6 +89,7 @@ sub install_package{
         say "... shaur is using git clone",CYAN,BOLD," => ",WHITE, BOLD,$url,RESET;
         sleep 1;
         say "";
+        
         print eval{qx(git clone "$url")};
         die RED, BOLD, "package not found...\n" if @_;
 
@@ -89,15 +102,20 @@ sub install_package{
         system "less PKGBUILD";
     }->();
 
-    say "";
+    say YELLOW,BOLD,"[!]Warning: it is strictly forbidden to use ctrl+D",RESET;
     print "are you willing to install ",WHITE,BOLD,$pkg,RESET,"?(Y/n) ";
     my $ch = <STDIN>;
+    chomp $ch;
     
     # if ch is y or Y or <space> or <space><space>... => i love the regex <3
-    exec "makepkg -si" if($ch =~/^(y|\s*)$/i);
+    if ($ch =~ /^(y|\s*)$/i){
+        system "makepkg -si";
+    }else{
+        chdir "../";
+        system "rm -rf $pkg/";
+    }
+
 }
-
-
 # - Export
 #our @EXPORT_OK = qw(search_to_info install_package);
 #our %EXPORT_TAGS = (
