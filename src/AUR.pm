@@ -84,7 +84,7 @@ sub install_package{
         say "... shaur is pointing to",CYAN,BOLD," => ",WHITE,BOLD,$dir,RESET;
         sleep 1;
         chdir $dir  or die RED,BOLD, "pkg-installed folder not found\n", RESET;
-		die RED, BOLD,"$pkg package not found...\n",RESET unless $isExists->($pkg);
+        die RED, BOLD,"$pkg package not found...\n",RESET unless $isExists->($pkg);
 
         say "... shaur is using git clone",CYAN,BOLD," => ",WHITE, BOLD,$url,RESET;
         sleep 1;
