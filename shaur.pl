@@ -9,6 +9,7 @@
 use strict;
 use warnings;
 use feature 'say';
+use Env;
 
 # - import color/color.pm (setting color)
 use lib 'color';
@@ -16,8 +17,8 @@ use Color ':consts';
 
 # - import src/AUR.pm (function_extern)
 use lib 'src';
-use AUR ':all';
-
+#use AUR ':all';
+use AUR;
 
 #///////////#
 #// MAIN ///#
@@ -25,6 +26,10 @@ use AUR ':all';
 
 sub main{ my $ARGC = scalar @ARGV;
     my $done = 0;
+
+    my $dir = "$ENV{'HOME'}/.shaur/";
+    mkdir $dir unless -d $dir; 
+    undef $dir;
 
     if($ARGC == 0){
         help();
