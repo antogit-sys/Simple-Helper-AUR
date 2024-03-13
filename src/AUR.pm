@@ -69,6 +69,7 @@ sub install_package{
         my $pathToDir = qx(pwd);
         my ($path) = $pathToDir =~ /\/([^\/]+)\/?\z/; #get current directory 
         chomp $path;
+        print "$pkg\t$path";
         if($path eq $pkg){
             chdir "../";
             system "rm -rf $pkg/";
@@ -76,11 +77,9 @@ sub install_package{
         exit;
     };
 
-
     say CYAN, BOLD,"="x25," shaur",RESET;
-    #die RED, BOLD,"$pkg package not found...\n",RESET unless $isExists->($pkg);
 
-    my $exec_install = sub{
+    #my $exec_install = sub{
         say "... shaur is pointing to",CYAN,BOLD," => ",WHITE,BOLD,$dir,RESET;
         sleep 1;
         chdir $dir  or die RED,BOLD, "pkg-installed folder not found\n", RESET;
@@ -95,12 +94,12 @@ sub install_package{
 
         say "";
         say "... shaur is reading",CYAN,BOLD," PKGBUILD ",RESET,"to ", WHITE, BOLD,$pkg,RESET;
-        sleep 2;
         chdir $pkg;
+        sleep 2;
 
         say "";
         system "less PKGBUILD";
-    }->();
+   #}->();
 
     say YELLOW,BOLD,"[!]Warning: it is strictly forbidden to use ctrl+D",RESET;
     print "are you willing to install ",WHITE,BOLD,$pkg,RESET,"?(Y/n) ";
@@ -116,6 +115,7 @@ sub install_package{
     }
 
 }
+
 # - Export
 #our @EXPORT_OK = qw(search_to_info install_package);
 #our %EXPORT_TAGS = (
