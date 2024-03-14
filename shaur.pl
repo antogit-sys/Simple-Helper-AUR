@@ -36,7 +36,7 @@ sub main{ my $ARGC = scalar @ARGV;
 	}else{
         my %options=(
             #opt
-            #"-l"    => [\&get_list, 0],
+            "-l"    => [\&AUR::list_package, 0],
             "-s"    => [\&AUR::search_to_info,1],
             "-si"   => [\&AUR::install_package,1],
             map { $_ => [\&help, 0] } qw(help -h --help) #qw --> get list

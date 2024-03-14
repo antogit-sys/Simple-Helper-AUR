@@ -69,7 +69,7 @@ sub install_package{
         my $pathToDir = qx(pwd);
         my ($path) = $pathToDir =~ /\/([^\/]+)\/?\z/; #get current directory 
         chomp $path;
-        print "$pkg\t$path";
+        #print "$pkg\t$path";
         if($path eq $pkg){
             chdir "../";
             system "rm -rf $pkg/";
@@ -79,7 +79,7 @@ sub install_package{
 
     say CYAN, BOLD,"="x25," shaur",RESET;
 
-    #my $exec_install = sub{
+    my $exec_install = sub{
         say "... shaur is pointing to",CYAN,BOLD," => ",WHITE,BOLD,$dir,RESET;
         sleep 1;
         chdir $dir  or die RED,BOLD, "pkg-installed folder not found\n", RESET;
@@ -99,21 +99,28 @@ sub install_package{
 
         say "";
         system "less PKGBUILD";
-   #}->();
+    }->();
 
     say YELLOW,BOLD,"[!]Warning: it is strictly forbidden to use ctrl+D",RESET;
     print "are you willing to install ",WHITE,BOLD,$pkg,RESET,"?(Y/n) ";
     my $ch = <STDIN>;
-    chomp $ch;
+    #chomp $ch;
     
     # if ch is y or Y or <space> or <space><space>... => i love the regex <3
-    if ($ch =~ /^(y|\s*)$/i){
-        system "makepkg -si";
+    if($ch =~ /^(y|\s*)$/i){
+        system "makepkg -si --noconfirm";
     }else{
         chdir "../";
         system "rm -rf $pkg/";
     }
 
+}
+
+sub list_package{
+    say CYAN,BOLD,"="x25," shaur package installed",RESET;
+    say CYAN, BOLD,"directory: ",WHITE,BOLD,"$ENV{'HOME'}/.shaur/pkg-installed/",RESET;
+    say "\t";
+    system "ls --color=auto $ENV{'HOME'}/.shaur/pkg-installed/";
 }
 
 # - Export
