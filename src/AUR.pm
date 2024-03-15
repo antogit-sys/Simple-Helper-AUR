@@ -119,9 +119,11 @@ sub install_package{
 sub list_package{
     say CYAN,BOLD,"="x25," shaur package installed",RESET;
     say CYAN, BOLD,"directory: ",WHITE,BOLD,"$ENV{'HOME'}/.shaur/pkg-installed/",RESET;
-    say "\t";
-    chdir "$ENV{'HOME'}/.shaur/pkg-installed/";
-    system "ls --color=auto -d */"; #show directories only
+    
+    say "\t\n",BLUE,BOLD;
+    AURUtils::print_filtered("$ENV{'HOME'}/.shaur/pkg-installed/");
+    say RESET;
+
 }
 
 # - Export
