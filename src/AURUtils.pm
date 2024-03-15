@@ -72,6 +72,28 @@ sub print_table {
     say "";
 }
 
+sub print_filtered{
+    my ($path) = @_;
+
+    opendir(my $dh, $path) or die "Unable to open directory $path: $!";
+    while (my $dir = readdir($dh)){
+        #next if $dir eq '.' || $dir eq '..';
+        next if $dir =~ /^\.\.?$/;
+        next unless -d "$path/$dir"; # next, is not directory
+
+        opendir(my $sub_dh, "$path/$dir") or die "Unable to open directory  $path/$dir: $!";
+        my @files = grep { -f "$path/$dir/$_" } readdir($sub_dh); # get all the files in the directory (no subdir)
+        closedir($sub_dh);
+
+        next unless grep { $_ eq 'PKGBUILD'} @files; # if PKGBUILD is not present, next to directory
+        next unless scalar @files > 1; # if there are more files than PKGBUILD, print the directory name
+        print "$dir ";
+    }
+    say "";
+    closedir($dh);
+}
+
+
 
 # - Export
 #our @EXPORT_OK = qw(package_detail print_table);
