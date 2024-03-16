@@ -121,19 +121,34 @@ sub list_package{
     say CYAN, BOLD,"directory: ",WHITE,BOLD,"$ENV{'HOME'}/.shaur/pkg-installed/",RESET;
     
     say "\t\n",BLUE,BOLD;
-    AURUtils::print_filtered("$ENV{'HOME'}/.shaur/pkg-installed/");
-    say RESET;
+    print join " ",AURUtils::print_filtered("$ENV{'HOME'}/.shaur/pkg-installed/");
+    say RESET,"\n";
 
 }
 
 sub update_package{
     my $pkg = shift;
 
-    say CYAN,BOLD,"="x25," shaur package update",RESET;
+    say CYAN, BOLD,"="x25," shaur package update",RESET;
     say CYAN, BOLD,"package: ",WHITE,BOLD,$pkg,RESET;
 
     chdir "$ENV{'HOME'}/.shaur/pkg-installed/$pkg/" or die RED,BOLD,"package $pkg not indexed...\n",RESET;
     system "git pull";
+    say "";
+}
+
+sub update_all{
+    my $pathToDir="$ENV{'HOME'}/.shaur/pkg-installed/";
+    my @pkgs = AURUtils::print_filtered($pathToDir);
+    say CYAN, BOLD,"="x25," shaur update all", RESET;
+    #say CYAN, BOLD,"
+    
+    foreach my $pkg (@pkgs){
+        say WHITE,BOLD,"package: ",RESET,$pkg;
+        chdir $pathToDir.$pkg or die RED,BOLD,"package $pkg not indexed...\n",RESET;
+        system "git pull";
+        say CYAN,BOLD,"-"x20,RESET;
+    }
     say "";
 }
 
