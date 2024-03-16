@@ -35,11 +35,12 @@ sub main{ my $ARGC = scalar @ARGV;
         help();
 	}else{
         my %options=(
-            #opt
+            #opts
             "-l"    => [\&AUR::list_package, 0],
             "-u"    => [\&AUR::update_package, 1],
+            "-ua"   => [\&AUR::update_all, 0],
             "-s"    => [\&AUR::search_to_info,1],
-            "-si"   => [\&AUR::install_package,1],
+            "-i"   => [\&AUR::install_package,1],
             map { $_ => [\&help, 0] } qw(help -h --help) #qw --> get list
         );
         my $opt = shift @ARGV;       
@@ -83,10 +84,10 @@ sub help{
     \t\t shaur <option> [package]
     \t@{[BOLD]}Option: @{[RESET]}
     \t\t -s  <package_name>\t(search package)
-    \t\t -si <package_name>\t(search & install)
+    \t\t -i  <package_name>\t(search & install)
     \t\t -l                \t(get list package)
     \t\t -u  <package_name>\t(update package)
-    \t\t -lu               \t(get list package & update)
+    \t\t -ua               \t(update all)
     \t\t -r  <package_name>\t(remove package)
     \t@{[BOLD]}Example: @{[RESET]}
     \t\t shaur -s lol
