@@ -152,6 +152,25 @@ sub update_all{
     say "";
 }
 
+sub remove_package{
+    my $pkg = shift;
+    my $pathToDir = "$ENV{'HOME'}/.shaur/pkg-installed/";
+    my $ch;
+
+    say CYAN,BOLD, "="x25," shaur remove package", RESET;
+    say "";
+    print "remove ",WHITE,BOLD,$pkg,RESET,"?(Y/n) ";
+    $ch = <STDIN>;
+
+    if($ch =~ /^(y|\s*)$/i){
+        system "sudo pacman --noconfirm -Rs $pkg";
+        chdir $pathToDir;
+        system "rm -rf $pkg";
+    
+    }
+    
+}
+
 # - Export
 #our @EXPORT_OK = qw(search_to_info install_package);
 #our %EXPORT_TAGS = (
