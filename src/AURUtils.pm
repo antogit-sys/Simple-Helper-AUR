@@ -18,6 +18,8 @@ use Color ':consts';
 #
 # - Utility
 #
+
+# - print package_detail
 sub package_detail{
     my ($pkg)=@_;
     my $url = "https://aur.archlinux.org/rpc/v5/info/$pkg";
@@ -58,7 +60,7 @@ sub package_detail{
     say CYAN, BOLD, "-" x 35, RESET;
 }
 
-
+# - print suggestions
 sub print_table {
     my ($results) = @_;
     my $num=1;
@@ -72,8 +74,10 @@ sub print_table {
     say "";
 }
 
+# - print only directories
 sub print_filtered{
     my ($path) = @_;
+    my @done = ();
 
     opendir(my $dh, $path) or die "Unable to open directory $path: $!";
     while (my $dir = readdir($dh)){
@@ -87,10 +91,12 @@ sub print_filtered{
 
         next unless grep { $_ eq 'PKGBUILD'} @files; # if PKGBUILD is not present, next to directory
         next unless scalar @files > 1; # if there are more files than PKGBUILD, print the directory name
-        print "$dir ";
+        push @done,"$dir";
     }
-    say "";
+    #say "";
     closedir($dh);
+
+    return @done;
 }
 
 
