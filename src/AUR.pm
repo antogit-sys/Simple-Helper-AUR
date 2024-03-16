@@ -126,6 +126,17 @@ sub list_package{
 
 }
 
+sub update_package{
+    my $pkg = shift;
+
+    say CYAN,BOLD,"="x25," shaur package update",RESET;
+    say CYAN, BOLD,"package: ",WHITE,BOLD,$pkg,RESET;
+
+    chdir "$ENV{'HOME'}/.shaur/pkg-installed/$pkg/" or die RED,BOLD,"package $pkg not indexed...\n",RESET;
+    system "git pull";
+    say "";
+}
+
 # - Export
 #our @EXPORT_OK = qw(search_to_info install_package);
 #our %EXPORT_TAGS = (
