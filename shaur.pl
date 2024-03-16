@@ -36,6 +36,7 @@ sub main{ my $ARGC = scalar @ARGV;
 	}else{
         my %options=(
             #opts
+            "-r"    => [\&AUR::remove_package, 1],
             "-l"    => [\&AUR::list_package, 0],
             "-u"    => [\&AUR::update_package, 1],
             "-ua"   => [\&AUR::update_all, 0],
