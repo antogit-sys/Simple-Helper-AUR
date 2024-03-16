@@ -37,6 +37,7 @@ sub main{ my $ARGC = scalar @ARGV;
         my %options=(
             #opt
             "-l"    => [\&AUR::list_package, 0],
+            "-u"    => [\&AUR::update_package, 1],
             "-s"    => [\&AUR::search_to_info,1],
             "-si"   => [\&AUR::install_package,1],
             map { $_ => [\&help, 0] } qw(help -h --help) #qw --> get list
@@ -84,6 +85,7 @@ sub help{
     \t\t -s  <package_name>\t(search package)
     \t\t -si <package_name>\t(search & install)
     \t\t -l                \t(get list package)
+    \t\t -u  <package_name>\t(update package)
     \t\t -lu               \t(get list package & update)
     \t\t -r  <package_name>\t(remove package)
     \t@{[BOLD]}Example: @{[RESET]}
