@@ -117,10 +117,9 @@ sub install_package{
 sub list_package{
     say CYAN,BOLD,"="x25," shaur package installed",RESET;
     say CYAN, BOLD,"directory: ",WHITE,BOLD,"$ENV{'HOME'}/.shaur/pkg-installed/",RESET;
-    
-    say "\t\n",BLUE,BOLD;
-    print join " ",AURUtils::print_filtered("$ENV{'HOME'}/.shaur/pkg-installed/");
-    say RESET,"\n";
+    say "";
+    say BLUE,BOLD,join " ",AURUtils::print_filtered("$ENV{'HOME'}/.shaur/pkg-installed/"),RESET or die RED,BOLD,"directory not indexed...\n",RESET;
+    say "\n";
 
 }
 
