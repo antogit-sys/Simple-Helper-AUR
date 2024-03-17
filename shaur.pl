@@ -12,24 +12,20 @@ use feature 'say';
 use Env;
 
 # - import color/color.pm (setting color)
-use lib 'color';
+use lib '/usr/local/bin/shaurFunctions/color';
 use Color ':consts';
 
 # - import src/AUR.pm (function_extern)
-use lib 'src';
+use lib '/usr/local/bin/shaurFunctions/src';
 #use AUR ':all';
 use AUR;
 
-#///////////#
-#// MAIN ///#
-#///////////#
+#////////////#
+#/// MAIN ///#
+#////////////#
 
 sub main{ my $ARGC = scalar @ARGV;
     my $done = 0;
-
-    my $dir = "$ENV{'HOME'}/.shaur/";
-    mkdir $dir unless -d $dir; 
-    undef $dir;
 
     if($ARGC == 0){
         help();

@@ -11,9 +11,8 @@ use feature "say";
 #use Exporter 'import';
 use JSON;
 
-use lib '../color';
+use lib '/usr/local/bin/shaurFunctions/color';
 use Color ':consts';
-
 
 #
 # - Utility

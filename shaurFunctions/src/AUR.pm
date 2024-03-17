@@ -14,9 +14,7 @@ use JSON;
 use Env;
 
 # - import color/color.pm (setting color)
-use lib '../color';
-use lib './';
-
+use lib '/usr/local/bin/shaurFunctions/color';
 use Color ':consts';
 use AURUtils ':all';
 
