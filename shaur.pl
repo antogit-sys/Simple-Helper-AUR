@@ -24,42 +24,49 @@ use AUR;
 #/// MAIN ///#
 #////////////#
 
+sub is_not_root {return $< == 0 ? 0 : 1;}
+
 sub main{ my $ARGC = scalar @ARGV;
     my $done = 0;
-
-    if($ARGC == 0){
-        help();
-	}else{
-        my %options=(
-            #opts
-            "-r"    => [\&AUR::remove_package, 1],
-            "-l"    => [\&AUR::list_package, 0],
-            "-u"    => [\&AUR::update_package, 1],
-            "-ua"   => [\&AUR::update_all, 0],
-            "-s"    => [\&AUR::search_to_info,1],
-            "-i"   => [\&AUR::install_package,1],
-            map { $_ => [\&help, 0] } qw(help -h --help) #qw --> get list
-        );
-        my $opt = shift @ARGV;       
+    
+    if (&is_not_root){
+        if($ARGC == 0){
+            help();
+	    }else{
+            my %options=(
+                #opts
+                "-r"    => [\&AUR::remove_package, 1],
+                "-l"    => [\&AUR::list_package, 0],
+                "-u"    => [\&AUR::update_package, 1],
+                "-ua"   => [\&AUR::update_all, 0],
+                "-s"    => [\&AUR::search_to_info,1],
+                "-i"   => [\&AUR::install_package,1],
+                map { $_ => [\&help, 0] } qw(help -h --help) #qw --> get list
+            );
+            my $opt = shift @ARGV;       
         
-        if (exists $options{$opt}){    
-             # - dereference to access each element of the array
-             my ($function, $num_parameter) = @{$options{$opt}};
+            if (exists $options{$opt}){    
+                # - dereference to access each element of the array
+                my ($function, $num_parameter) = @{$options{$opt}};
 
-             if (@ARGV != $num_parameter){
-                 say BOLD,RED,"invalid number of parameter for $opt.",RESET;
-                 help();
-                 $done = 1;
-             }else{
-                 # - exec foo(parameter) or foo()
-                 my $pkg = shift @ARGV; #!
-                 $pkg ? &$function($pkg) : &$function();
-             } 
-        }else{
-          say BOLD,RED,"!This option is not available",RESET;
-          help();
-          $done = 1;
+                if (@ARGV != $num_parameter){
+                    say BOLD,RED,"invalid number of parameter for $opt.",RESET;
+                    help();
+                    $done = 1;
+                }else{
+                    # - exec foo(parameter) or foo()
+                    my $pkg = shift @ARGV; #!
+                    $pkg ? &$function($pkg) : &$function();
+                } 
+            }else{
+                say BOLD,RED,"!This option is not available",RESET;
+                help();
+                $done = 1;
+            }
         }
+   }else{
+       say BOLD,RED,"Error! In executing this script as root, you're strictly prohibited.",RESET;
+       $done=1
    }
 
    return $done;
@@ -92,7 +99,6 @@ USE
 ;
     say "$options";
 }
-
 
 exit main() if ($0 eq __FILE__);    # if corrent file is the main file 
                                     #   exit the programm with the retun value of the main
