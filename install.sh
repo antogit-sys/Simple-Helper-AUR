@@ -6,13 +6,17 @@ declare -r LCYAN='\033[0;96m'
 declare -r BOLD='\033[1m'
 declare -r NC='\033[0m' # No Color
 
+
 function main {
     if [ $UID == 0 ]
     then
         printf "${RED}[!] Error this script can only be used by the normal user ${NC}\n"
-    
+
     else
-        message_box
+        sudo pacman -S --noconfirm dialog >/dev/null 2>&1
+        if pacman -Qs dialog >/dev/null 2>&1; then
+            message_box
+        fi
         install_cpan
         execute
     fi
@@ -45,7 +49,7 @@ execute() {
     pkg_installed_dir="$HOME/.shaur/pkg-installed"
     
     printf "${LCYAN}[+] create shaur command${NC}\n";
-    sudo printf ""
+    
     printf "Copying shaur.pl to... "
     sleep 1
     sudo cp shaur.pl /usr/local/bin/shaur
