@@ -25,8 +25,8 @@ exit
 }
 
 function install_cpan() {
-    printf "${LCYAN}${BOLD}[!] Installing SHAUR for Arch Linux\n"
-    echo -e "-----------------------------------${NC}";
+    printf "${LCYAN}${BOLD}[*] Installing SHAUR for Arch Linux :)\n"
+    echo -e "---------------------------------------${NC}";
     printf "$LCYAN[+] Installing necessary Perl modules...${NC}\n"
     cpan install JSON Env
     if [ $? -ne 0 ]; then
@@ -81,7 +81,7 @@ execute() {
     else
         echo -e "Directory '$pkg_installed_dir' already exists.\n"
     fi
-    printf "${LCYAN}${BOLD}Installation completed.${NC}\n\n"
+    printf "${LCYAN}${BOLD}[!] Installation completed.${NC}\n\n"
 	
 }
 
