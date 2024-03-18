@@ -7,15 +7,15 @@ declare -r BOLD='\033[1m'
 declare -r NC='\033[0m' # No Color
 
 function main {
-	if [ $UID == 0 ]
-	then
-		printf "${RED}[!] Error this script can only be used by the normal user ${NC}\n"
-		
-	else
-		message_box
+    if [ $UID == 0 ]
+    then
+        printf "${RED}[!] Error this script can only be used by the normal user ${NC}\n"
+    
+    else
+        message_box
         install_cpan
-		execute
-	fi
+        execute
+    fi
 
 exit
 }
@@ -34,11 +34,11 @@ function install_cpan() {
 
 function message_box() {
     dialog --backtitle "Setup install SHAUR" --title "Simple Helper AUR install" \
-	--msgbox "this tool is covered by the gpl3 license\n
-		\ngithub: antogit-sys\n\n\n      
-		proceed with the installation?..." \
-	10 50
-	clear
+    --msgbox "this tool is covered by the gpl3 license\n
+    	\ngithub: antogit-sys\n\n\n      
+    	proceed with the installation?..." \
+    10 50
+    clear
 }
 
 execute() {
@@ -47,8 +47,8 @@ execute() {
     printf "${LCYAN}[+] create shaur command${NC}\n";
     sudo printf ""
     printf "Copying shaur.pl to... "
-	sleep 1
-	sudo cp shaur.pl /usr/local/bin/shaur
+    sleep 1
+    sudo cp shaur.pl /usr/local/bin/shaur
     if [ $? -ne 0 ]; then
         printf "${RED}[!] Error moving shaur.pl.${NC}\n"
         exit 1
@@ -56,8 +56,8 @@ execute() {
     printf "$LGREEN/usr/local/bin/shaur${NC}\n"
 
     printf "Copying shaurFunction recursively to... "
-	sleep 2
-	sudo cp -r shaurFunctions /usr/local/bin/shaurFunctions
+    sleep 2
+    sudo cp -r shaurFunctions /usr/local/bin/shaurFunctions
     if [ $? -ne 0 ]; then
         printf "${RED}[!] Error copying shaurFunctions.${NC}\n"
         exit 1
