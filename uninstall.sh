@@ -56,7 +56,7 @@ execute() {
         echo -e "Directory '$config_dir' does not exist.\n"
     else
         sudo rm -rf $config_dir
-        echo -e "Directory $config_dir... ${RED}deleted${NC}\n"
+        echo -e "Directory '$config_dir'... ${RED}deleted${NC}\n"
     fi
     printf "${YELLOW}${BOLD}[!] Uninstallation completed.${NC}\n\n"
 	
