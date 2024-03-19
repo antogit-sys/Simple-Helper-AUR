@@ -32,7 +32,8 @@ sub main{ my $ARGC = scalar @ARGV;
     if (&is_not_root){
         if($ARGC == 0){
             help();
-	    }else{
+	    }
+        else{
             my %options=(
                 #opts
                 "-r"    => [\&AUR::remove_package, 1],
@@ -44,32 +45,36 @@ sub main{ my $ARGC = scalar @ARGV;
                 map { $_ => [\&help, 0] } qw(help -h --help) #qw --> get list
             );
             my $opt = shift @ARGV;       
-        
-            if (exists $options{$opt}){    
-                # - dereference to access each element of the array
-                my ($function, $num_parameter) = @{$options{$opt}};
+            
+            # - requests handler
+            my $requests_handler = sub{
+                if (exists $options{$opt}){    
+                    # - dereference to access each element of the array
+                    my ($function, $num_parameter) = @{$options{$opt}};
 
-                if (@ARGV != $num_parameter){
-                    say BOLD,RED,"invalid number of parameter for $opt.",RESET;
-                    help();
-                    $done = 1;
+                    if (@ARGV != $num_parameter){
+                        say BOLD,RED,"invalid number of parameter for $opt.",RESET;
+                        help();
+                        return 1;
+                    }else{
+                        # - exec foo(parameter) or foo()
+                        my $pkg = shift @ARGV; #!
+                        $pkg ? &$function($pkg) : &$function();
+                    } 
                 }else{
-                    # - exec foo(parameter) or foo()
-                    my $pkg = shift @ARGV; #!
-                    $pkg ? &$function($pkg) : &$function();
-                } 
-            }else{
-                say BOLD,RED,"!This option is not available",RESET;
-                help();
-                $done = 1;
-            }
+                    say BOLD,RED,"!This option is not available",RESET;
+                    help();
+                    return 1;
+                }
+            };
+            $done = $requests_handler->(\%options, $opt);
         }
-   }else{
-       say BOLD,RED,"Error! In executing this script as root, you're strictly prohibited.",RESET;
-       $done=1
-   }
+    }else{
+        say BOLD,RED,"Error! In executing this script as root, you're strictly prohibited.",RESET;
+        $done=1
+    }
 
-   return $done;
+return $done;
 }
 
 
