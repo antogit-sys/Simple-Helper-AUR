@@ -88,7 +88,7 @@ sub help{
     
     my $options = <<USE  
     \t@{[BOLD]}Description:@{[RESET]} 
-    \t\tshaur is an Simple Helper AUR for Arch-Linux
+    \t\tshaur is a Simple Helper AUR for Arch-Linux
     \t@{[BOLD]}Usage: @{[RESET]}
     \t\t shaur <option> [package]
     \t@{[BOLD]}Option: @{[RESET]}
