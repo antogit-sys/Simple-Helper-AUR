@@ -77,6 +77,22 @@ bash install.sh
 $ shaur help
 ```
 
+<a name="t5"></a>
+
 ## 5. Use
 
- options:
+Let's assume wee need to work with the package "marktext-bin", not knowing the exact name of package.
+
+Options:
+
+<ul><li>search</li></ul>
+
+```bash
+shaur -s marktext
+```
+
+<img src="img/search1_shaur.png"/>
+
+<img src="img/search2_shaur.png"/>
+
+<ul><li>install</li></ul>
