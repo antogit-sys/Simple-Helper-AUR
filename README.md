@@ -3,6 +3,10 @@
     <img src='img/banner_shaur.png'/>
 </h1>
 
+<hr>
+<p> Indice </p>
+<a href='#s1'>test 3</a>
+
 ## 1. Introdution 🚀
 
 **SHAUR**,  acronym for **S**imple **H**elper **AUR**, is a very minimal and functional AUR helper. Its task is to greatly simplify what well-known AUR helpers do, adding many more functionalities like AUR package tracking. Imagine tackling the climb of Everest: while other AUR helpers force you to struggle along steep and rugged slopes, with Shaur it's like having wings. It lifts you towards the highest peaks with astonishing speed, overcoming every obstacle along the way and taking you directly to the AUR summit without even feeling the fatigue of the ascent.
@@ -35,6 +39,7 @@ git clone https://github.com/antogit-sys/Simple-Helper-AUR.git
 cd Simple-Helper-AUR/
 ```
 
+<a name="s1">
 3. install shaur
    
    *Note: Execute the install.sh file in user mode, otherwise it will not start.*
