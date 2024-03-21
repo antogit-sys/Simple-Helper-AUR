@@ -25,7 +25,7 @@ While most AUR helpers advise against running as the root user, **SHAUR enforces
 
 3) **Package Manager:** Pacman 
 
-<a name="s1">
+<a name="s1"></a>
 ## 4. installation (!usermode)
 
 1) clone the repository
