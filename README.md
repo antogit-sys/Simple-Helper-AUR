@@ -20,3 +20,41 @@ While most AUR helpers advise against running as the root user, **SHAUR enforces
 2) **Shell:** Bash
 
 3) **Package Manager:** Pacman 
+
+## 4. installation (!usermode)
+
+1) clone the repository
+
+```bash
+git clone https://github.com/antogit-sys/Simple-Helper-AUR.git
+```
+
+2. go to Simple-Helper-AUR/
+
+```bash
+cd Simple-Helper-AUR/
+```
+
+3. install shaur
+   
+   *Note: Execute the install.sh file in user mode, otherwise it will not start.*
+
+```bash
+bash install.sh
+```
+
+ and wait a few seconds
+
+<img src="img/dialog_shaur.png" />
+
+*Proceed with the Enter key*.
+
+
+
+<img src="img/install_shaur.png" />
+
+*To invoke SHAUR, type 'shaur' or 'shaur help' or 'shaur --help' or 'shaur -h' or 'shaur help'.*
+
+```bash
+$ shaur help
+```
