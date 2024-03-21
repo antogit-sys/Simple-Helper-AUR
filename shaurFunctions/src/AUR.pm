@@ -16,9 +16,8 @@ use Env;
 # - import color/color.pm (setting color)
 use lib '/usr/local/bin/shaurFunctions/color';
 use Color ':consts';
-use AURUtils ':all';
+use AURUtils; 
 
-use Exporter 'import';
 
 #
 # mains functions 
@@ -77,6 +76,8 @@ sub install_package{
 
     say CYAN, BOLD,"="x25," shaur",RESET;
 
+    &AURUtils::update_archpkgs;
+
     my $exec_install = sub{
         say "... shaur is pointing to",CYAN,BOLD," => ",WHITE,BOLD,$dir,RESET;
         sleep 1;
@@ -127,8 +128,9 @@ sub update_package{
     my $pkg = shift;
 
     say CYAN, BOLD,"="x25," shaur package update",RESET;
-    say CYAN, BOLD,"package: ",WHITE,BOLD,$pkg,RESET;
+    &AURUtils::update_archpkgs;
 
+    say CYAN, BOLD,"package: ",WHITE,BOLD,$pkg,RESET;
     chdir "$ENV{'HOME'}/.shaur/pkg-installed/$pkg/" or die RED,BOLD,"package $pkg not indexed...\n",RESET;
     system "git pull";
     say "";
@@ -138,7 +140,7 @@ sub update_all{
     my $pathToDir="$ENV{'HOME'}/.shaur/pkg-installed/";
     my @pkgs = AURUtils::print_filtered($pathToDir);
     say CYAN, BOLD,"="x25," shaur update all", RESET;
-    #say CYAN, BOLD,"
+    &AURUtils::update_archpkgs;
     
     foreach my $pkg (@pkgs){
         say WHITE,BOLD,"package: ",RESET,$pkg;
