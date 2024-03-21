@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 #
-#   Nickanme:   Aska
+#   Nickname:   Aska
 #   GitHub:     https://github.com/antogit-sys
 #   LICENSE:    GPLv3 
 #
