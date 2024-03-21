@@ -93,7 +93,7 @@ sub help{
     \t\t shaur <option> [package]
     \t@{[BOLD]}Option: @{[RESET]}
     \t\t -s  <package_name>\t(search package)
-    \t\t -i  <package_name>\t(search & install)
+    \t\t -i  <package_name>\t(install package)
     \t\t -l                \t(get list package)
     \t\t -u  <package_name>\t(update package)
     \t\t -ua               \t(update all)
