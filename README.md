@@ -13,7 +13,7 @@ For security reasons, SHAUR cannot be executed or installed directly by the root
 
 While most AUR helpers advise against running as the root user, **SHAUR enforces, for security reasons, the necessity of always operating as a normal user.** This control was personally implemented prior to the introduction of a requests handler in the form of an anonymous function.
 
-## 3. Requires System:
+## 3. Requires System
 
 1) **Operation System:** Arch linux and derivatives
 
