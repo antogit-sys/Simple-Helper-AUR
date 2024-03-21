@@ -8,7 +8,7 @@ package AURUtils;
 
 use strict;
 use feature "say";
-#use Exporter 'import';
+
 use JSON;
 
 use lib '/usr/local/bin/shaurFunctions/color';
@@ -98,7 +98,11 @@ sub print_filtered{
     return @done;
 }
 
-
+sub update_archpkgs{
+    say "... updating system packages with ",CYAN,BOLD,"pacman",RESET;
+    system "sudo pacman -Syu";
+    say "";
+}
 
 # - Export
 #our @EXPORT_OK = qw(package_detail print_table);
@@ -107,5 +111,3 @@ sub print_filtered{
 #);
 
 1;
-
-
