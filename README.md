@@ -10,7 +10,7 @@
     <li><a href='#t3'>Requires System</a></li>
     <li><a href='#t4'>Installation</a></li>
     <li><a href='#t5'>Use</a></li>
-		</ol>
+		<ol>
 			<li><a href='#t5.1'>search</a></li>
 			<li><a href='#t5.2'>install</a></li>
 			<li><a href='#t5.3'>list installed of package</a></li>
