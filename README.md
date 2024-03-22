@@ -111,6 +111,7 @@ shaur -i marktext-bin
 <img src="img/pkgi1.png"/>
 <i>Verify that everything is okay and press 'q' to exit</i>
 <br>
-
+<br>
+<br>
 <img src="img/pkgi2.png"/>
 <i>Press Enter to install the package.</i>
