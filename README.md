@@ -136,7 +136,7 @@ shaur -u marktext-bin
 
 ![](img/u.png)
 
-<br><br>
+<br>
 
 <ul><li>update (all)</li></ul>
 
@@ -156,7 +156,7 @@ shaur -ua
 shaur -r marktext-bin
 ```
 
-<img title="" src="file:///home/aska/GIT/Simple-Helper-AUR/img/rm.png" alt="">
+<img title="" src="img/rm.png" alt="">
 
 ## 6. Uninstall Shaur
 
@@ -172,6 +172,6 @@ Run as a normal user uninstall.sh
 bash uninstall.sh
 ```
 
-<img title="" src="file:///home/aska/GIT/Simple-Helper-AUR/img/uninstall.png" alt="">
+<img title="" src="img/uninstall.png" alt="">
 
 > Warning: once SHAUR is uninstalled, the packages will not be removed; they will simply be treated as local packages. 
