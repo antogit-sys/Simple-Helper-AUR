@@ -115,3 +115,13 @@ shaur -i marktext-bin
 <br>
 <img src="img/pkgi2.png"/>
 <i>Press Enter to install the package.</i>
+<br>
+<br>
+
+<ul><li>List of installed packages</li></ul>
+
+```bash
+shaur -l
+```
+
+![](img/list1.png)
