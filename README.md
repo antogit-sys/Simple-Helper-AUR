@@ -10,6 +10,15 @@
     <li><a href='#t3'>Requires System</a></li>
     <li><a href='#t4'>Installation</a></li>
     <li><a href='#t5'>Use</a></li>
+		</ol>
+			<li><a href='#t5.1'>search</a></li>
+			<li><a href='#t5.2'>install</a></li>
+			<li><a href='#t5.3'>list installed of package</a></li>
+			<li><a href='#t5.4'>update (a package)</a></li>
+			<li><a href='#t5.5'>update (all)</a></li>
+			<li><a href='#t5.6'>remove</a></li>
+		</ol>
+    <li><a href='#t6>Uninstallation</a></li>
 </ol>
 
 <hr>
@@ -85,6 +94,8 @@ Let's assume wee need to work with the package "marktext-bin", not knowing the e
 
 Options:
 
+<a name="t5.1"></a>
+
 <ul><li>search</li></ul>
 
 ```bash
@@ -96,6 +107,8 @@ shaur -s marktext
 <img src="img/search2_shaur.png"/>
 
 <i>Note: if we search directly for the package name, SHAUR will provide us with the details directly</i>
+
+<a name="t5.2"></a>
 
 <ul><li>install</li></ul>
 
@@ -119,6 +132,8 @@ shaur -i marktext-bin
 <br>
 <br>
 
+<a name="t5.3"></a>
+
 <ul><li>list of installed packages</li></ul>
 
 ```bash
@@ -127,6 +142,8 @@ shaur -l
 
 ![](img/list1.png)
 <br><br>
+
+<a name="t5.4"></a>
 
 <ul><li>update (a package)</li></ul>
 
@@ -137,6 +154,8 @@ shaur -u marktext-bin
 ![](img/u.png)
 
 <br>
+
+<a name="t5.5"></a>
 
 <ul><li>update (all)</li></ul>
 
@@ -150,6 +169,8 @@ shaur -ua
 
 <br>
 
+<a name="t5.6"></a>
+
 <ul><li>remove package</li></ul>
 
 ```bash
@@ -158,7 +179,9 @@ shaur -r marktext-bin
 
 <img title="" src="img/rm.png" alt="">
 
-## 6. Uninstall Shaur
+<a name="t6"></a>
+
+## 6. Uninstallation Shaur
 
 go to Simple-Helper-AUR directory
 
