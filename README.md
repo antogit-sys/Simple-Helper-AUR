@@ -125,8 +125,7 @@ shaur -l
 ```
 
 ![](img/list1.png)
-<br>
-<br>
+
 
 <ul><li>update (a package)</li></ul>
 
@@ -136,8 +135,6 @@ shaur -u marktext-bin
 
 ![](img/u.png)
 
-<br>
-<br>
 
 <ul><li>update (all)</li></iu>
 
