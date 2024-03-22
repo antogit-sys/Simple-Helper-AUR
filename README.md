@@ -138,7 +138,7 @@ shaur -u marktext-bin
 
 <br><br>
 
-<ul><li>update (all)</li></iu>
+<ul><li>update (all)</li></ul>
 
 ```bash
 shaur -ua
@@ -147,4 +147,31 @@ shaur -ua
 ![](img/ua.png)
 
 > Note: the actual command to be executed is 'git pull'.
-<br><br>
+
+<br>
+
+<ul><li>remove package</li></ul>
+
+```bash
+shaur -r marktext-bin
+```
+
+<img title="" src="file:///home/aska/GIT/Simple-Helper-AUR/img/rm.png" alt="">
+
+## 6. Uninstall Shaur
+
+go to Simple-Helper-AUR directory
+
+```bash
+cd Simple-Helper-AUR/
+```
+
+Run as a normal user uninstall.sh
+
+```bash
+bash uninstall.sh
+```
+
+<img title="" src="file:///home/aska/GIT/Simple-Helper-AUR/img/uninstall.png" alt="">
+
+> Warning: once SHAUR is uninstalled, the packages will not be removed; they will simply be treated as local packages. 
