@@ -125,16 +125,17 @@ shaur -l
 ```
 
 <img src="img/list1.png">
-<br><br><br>
+<br>
+<br>
 
 <ul><li>update (a package)</li></ul>
-
 ```bash
 shaur -u marktext-bin
 ```
 
 <img src="img/u.png">
-<br><br><br>
+<br>
+<br>
 
 <ul><li>update (all)</li></iu>
 
@@ -142,8 +143,6 @@ shaur -u marktext-bin
 shaur -ua
 ```
 
-<img src="img/ua.png">
-
-
+![](img/ua.png)
 
 > Note: the actual command to be executed is 'git pull'.
