@@ -124,16 +124,18 @@ shaur -i marktext-bin
 shaur -l
 ```
 
-<img src="img/list1.png">
+![](img/list1.png)
 <br>
 <br>
 
 <ul><li>update (a package)</li></ul>
+
 ```bash
 shaur -u marktext-bin
 ```
 
-<img src="img/u.png">
+![](img/u.png)
+
 <br>
 <br>
 
