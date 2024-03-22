@@ -95,4 +95,22 @@ shaur -s marktext
 
 <img src="img/search2_shaur.png"/>
 
+<i>Note: if we search directly for the package name, SHAUR will provide us with the details directly</i>
+
 <ul><li>install</li></ul>
+
+```bash
+shaur -i marktext-bin
+```
+
+<img src="img/pkgi.png"/>
+<i>Before cloning the package and reading the PKGBUILD, SHAUR takes care of checking for updates of already installed local packages (it's good to confirm the update).</i>
+<br>
+<br>
+<br>
+<img src="img/pkgi1.png"/>
+<i>Verify that everything is okay and press 'q' to exit</i>
+<br>
+
+<img src="img/pkgi2.png"/>
+<i>Press Enter to install the package.</i>
