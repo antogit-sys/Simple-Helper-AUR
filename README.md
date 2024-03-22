@@ -49,7 +49,7 @@ While most AUR helpers advise against running as the root user, **SHAUR enforces
 
 <a name="t4"></a>
 
-## 4. installation (!usermode)
+## 4. installation (!usermode) 📥 🙂
 
 1) clone the repository
 
@@ -88,7 +88,7 @@ $ shaur help
 
 <a name="t5"></a>
 
-## 5. Use
+## 5. Use 🛠️
 
 Let's assume wee need to work with the package "marktext-bin", not knowing the exact name of package.
 
@@ -181,7 +181,7 @@ shaur -r marktext-bin
 
 <a name="t6"></a>
 
-## 6. Uninstallation Shaur
+## 6. Uninstallation Shaur 🗑️😡
 
 go to Simple-Helper-AUR directory
 
