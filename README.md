@@ -118,10 +118,32 @@ shaur -i marktext-bin
 <br>
 <br>
 
-<ul><li>List of installed packages</li></ul>
+<ul><li>list of installed packages</li></ul>
 
 ```bash
 shaur -l
 ```
 
-![](img/list1.png)
+<img src="img/list1.png">
+<br><br><br>
+
+<ul><li>update (a package)</li></ul>
+
+```bash
+shaur -u marktext-bin
+```
+
+<img src="img/u.png">
+<br><br><br>
+
+<ul><li>update (all)</li></iu>
+
+```bash
+shaur -ua
+```
+
+<img src="img/ua.png">
+
+
+
+> Note: the actual command to be executed is 'git pull'.
